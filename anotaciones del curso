@@ -1,0 +1,69 @@
+// CARGA DE DATOS
+
+** pedir informacion del dataset -> delimitadores, formato de los campos nuericos (separador decimal)
+** Repositorio https://github.com/joanby/python-ml-course
+Investigar como funciona github desktop
+
+** por si no autocompleta jupyter agregar en la primer linea -> %config IPCompleter.greedy=True 
+
+PANDAS package para carga de datasets
+	-> cmd df.columns.values para listar las columnas del dataset
+	
+** Si la descarga de los datos se hace desde la web de forma manual con urllib3,hay que decodificar con "decode('utf-8')" y luego transformar en dataframe (pd.Dataframe(Array de datos))
+
+// DATA CLEANING
+
+** hacer respaldo de los dataset antes de empezar
+** con la fn shape de pandas saco la dimension del dataset
+** info del estadistico basico -> df.describe()
+** verificar si hay campos nulos -> y de haber hay que tratarlos para evitar la dispersion
+
+La fn ravel() arma un array con la filas de los datos
+
+pd.isnull(df['nombre del atributo']).values.ravel().sum() -> esta bueno para para controlar si hay datos nulos
+
+pd.dropna() -> fn para limpiar los nan del df , borra por con coordenadas donde (axis = 0) elimina fila, axis = 1 elimina columna
+
+** Importante es tratar de inferir aquellos datos que no se tienen antes de borrar
+	> dependiendo del tipo de dato se podria llenar completar con haciendo un data.fillna(0)
+	> Es SUMAMENTE PREFERIBLE sacar el valor promedio del dato faltante usando data.fillna("nombre del dato").mean()
+	> Se puede completar el dato tambien con el valor mas cercano al dato anterior data.fillna(method="backfill") o la valor mas cercano al posterior data.fillna(method="ffill") 	 
+	
+** Variables dummy
+	Es una variable ficticia es aquella que toma solo el valor 0 o 1 para indicar la ausencia o presencia de algún efecto categórico que se puede esperar que cambie el resultado como por ejemplo el sexo 
+	> Para hacer una variable dummy se llama fn de pandas -> dummy_sex = pd.get_dummies(df['sex'],prefix='sex') 
+	> Luego el eliminar aquella columna que genero los dummies con fn pd.drop("nombre del dato") para luego agregar al df las variable dummies
+	> Con fn concat -> pd.concat((df, dummy_sex ), axis = 1 )
+
+//PLOTS y VISUALIZACION DE LOS DATOS
+
+	import matplotlib.pyplot  
+
+** Tener en cuenta
+	> %matplotlib inline  -> genera el plot dentro del div del notebook
+	> savefig(ruta) -> podes guardar tanto local como remoto el plot para ser exportado
+
+*** SCATTER PLOT (genera grafico de nube)
+	> Es muy util para ayudar a ver la correlacion entre las variables
+	> data.plot(kind='scatter',x='nombre de variable',y='nombre de variable')
+
+plt.subplots(2,2, sharex=True,sharey=True) -> permite agrupar varios plots en un solo grafico los seteos de share es para definir si compaten tanto el eje X como el Y
+
+data.plot(kind='scatter',x='nombre de variable',y='nombre de variable',ax=axs[0][0]) -> se definen la posicion dentro del grafico gral
+data.plot(kind='scatter',x='nombre de variable',y='nombre de variable',ax=axs[0][1]) 
+data.plot(kind='scatter',x='nombre de variable',y='nombre de variable',ax=axs[1][0])
+data.plot(kind='scatter',x='nombre de variable',y='nombre de variable',ax=axs[1][1])
+	
+
+	por ejemplo
+
+		figure , axs = plt.subplots(2,2, sharex=True,sharey=True)
+		data.plot(kind='scatter',x='Day Mins',y='Day Charge',ax=axs[0][0])
+		data.plot(kind='scatter',x='Night Mins',y='Night Charge',ax=axs[0][1])
+		data.plot(kind='scatter',x='Day Calls',y='Day Charge',ax=axs[1][0])
+		data.plot(kind='scatter',x='Night Calls',y='Night Charge',ax=axs[1][1])
+
+
+
+	
+	
