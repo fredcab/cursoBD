@@ -64,6 +64,26 @@ data.plot(kind='scatter',x='nombre de variable',y='nombre de variable',ax=axs[1]
 		data.plot(kind='scatter',x='Night Calls',y='Night Charge',ax=axs[1][1])
 
 
+// HISTOGRAMA DE FRECUENCIA 
+** Son sumamente utiles para ver las distribuciones de variables numericas
+	
+	por ejemplo
 
+		plt.hist(data['Day Calls'],bins =20)  ->donde bins es la cantidad de divisiones del grafico se la puede pasar un array 
+		plt.xlabel('Nro de llamadas')
+		plt.ylabel('Frecuencia')
+		plt.title('Histograma del nro de llamadas al dia')
+
+** Para calcular la cantidad de divisiones del grafico se realiza aplicando la regla de Sturges ( 1 + log2 (dimension de la muestra))
+
+// BOXPLOT
+
+** Muestra en forma de caja como se disribuyen los datos graficamente, mostrando los 3 cuartiles y los bigotes tanto limite superior como limite inferior en la distribucion de los datos
 	
-	
+
+	por ejemplo
+
+		plt.boxplot(data['Day Calls'])
+		plt.ylabel('Numero de llamadas diarias')
+		plt.title('Boxplot de las llamadas')
+
