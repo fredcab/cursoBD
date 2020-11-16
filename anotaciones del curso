@@ -123,3 +123,7 @@ data.plot(kind='scatter',x='nombre de variable',y='nombre de variable',ax=axs[1]
 
 ** np.arange(100) crea un array con el rango definido
 ** np.random.shuffle() mezcla el array
+
+// Es una buena practica generar una semilla
+
+
